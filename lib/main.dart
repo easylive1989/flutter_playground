@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_playground/bloc/counter_with_bloc.dart';
 import 'package:flutter_playground/bloc/counter_with_multi_bloc.dart';
+import 'package:flutter_playground/card/card_list.dart';
 import 'package:flutter_playground/custom_paint/login_page.dart';
 import 'package:flutter_playground/http/web_content_widget.dart';
 import 'package:flutter_playground/lottie/lottie_example_widget.dart';
 import 'package:flutter_playground/network_image_list/network_image_list.dart';
+import 'package:flutter_playground/notification/notfication_counter.dart';
 import 'package:flutter_playground/provider/counter_with_provider.dart';
 import 'package:flutter_playground/sliver/sliver_page.dart';
+import 'package:flutter_playground/stack/texts_in_stack.dart';
 import 'package:flutter_playground/text_overflow/text_overflow_widget.dart';
 
 import 'column_build/column_build.dart';
@@ -38,7 +41,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _addPage("Notification", NotificationCounter());
+    _addPage("Stack", TextsInStack());
     _addPage("Login", LoginPage());
+    _addPage("Image Card", ImageCardList());
     _addPage("Silver", SliverPage());
     _addPage("Http", WebContentWidget());
     _addPage("Bloc", CounterWithBloc());

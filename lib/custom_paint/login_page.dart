@@ -8,13 +8,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraint) {
-        return CustomPaint(
-          size: Size(constraint.maxWidth, constraint.maxHeight),
+    return ClipRect(
+      child: Align(
+        child: CustomPaint(
+          size: Size(500, 500),
           painter: LoginPainter(),
-        );
-      },
+        ),
+      ),
     );
   }
 }
