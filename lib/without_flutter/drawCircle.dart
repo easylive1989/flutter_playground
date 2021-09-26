@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void drawMultipleShape() {
   ContainerLayer containerLayer = ContainerLayer();
@@ -69,36 +70,82 @@ void drawMultipleShape() {
 
 void drawCircle() {
   PictureRecorder recorder = PictureRecorder();
-  // 初始化 Canvas 时，传入 PictureRecorder 实例
-  // 用于记录发生在该 canvas 上的所有操作
-  //
   Canvas canvas = Canvas(recorder);
 
   Paint circlePaint = Paint();
-  circlePaint.color = Colors.blueAccent;
-
-  // 调用 Canvas 的绘制接口，画一个圆形
-  //
+  circlePaint.color = Colors.blue;
   canvas.drawCircle(Offset(400, 400), 300, circlePaint);
 
-  // 绘制结束，生成Picture
-  //
   Picture picture = recorder.endRecording();
 
   SceneBuilder sceneBuilder = SceneBuilder();
-  sceneBuilder.pushOffset(0, 0);
-  // 将 picture 送入 SceneBuilder
-  //
   sceneBuilder.addPicture(Offset(0, 0), picture);
-  sceneBuilder.pop();
 
-  // 生成 Scene
-  //
   Scene scene = sceneBuilder.build();
-
   window.onDrawFrame = () {
-    // 将 scene 送入 Engine 层进行渲染显示
-    //
+    window.render(scene);
+  };
+  window.scheduleFrame();
+}
+
+void drawLogin() {
+  PictureRecorder recorder = PictureRecorder();
+  Canvas canvas = Canvas(recorder);
+
+  var paint = Paint();
+  paint
+    ..style = PaintingStyle.fill
+    ..shader = LinearGradient(
+      begin: Alignment.centerRight,
+      end: Alignment.centerLeft,
+      colors: [
+        Color(0xff2a2be8),
+        Color(0xff5569e8),
+      ],
+    ).createShader(Rect.fromCircle(
+      center: Offset(90, 50),
+      radius: 80,
+    ));
+
+  canvas.drawCircle(Offset(90, 50), 200, paint);
+
+  paint.shader = null;
+  paint.color = Color(0xff2a2be8);
+  canvas.drawCircle(Offset(268, 30), 90, paint);
+  canvas.drawCircle(Offset(350, 20), 40, paint);
+
+  paint.color = Colors.black;
+  canvas.drawCircle(Offset(315, -115), 100, paint);
+  canvas.drawCircle(Offset(370, 160), 100, paint);
+
+  final textSpan = TextSpan(children: [
+    TextSpan(
+      text: 'Welcome Back,\n',
+      style: GoogleFonts.lato().copyWith(fontSize: 20, color: Colors.white),
+    ),
+    TextSpan(
+      text: 'Log In!',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 50,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ]);
+  final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.left);
+  textPainter.layout(minWidth: 0, maxWidth: 300);
+  textPainter.paint(canvas, Offset(30, 40));
+
+  Picture picture = recorder.endRecording();
+
+  SceneBuilder sceneBuilder = SceneBuilder();
+  sceneBuilder.addPicture(Offset(0, 0), picture);
+
+  Scene scene = sceneBuilder.build();
+  window.onDrawFrame = () {
     window.render(scene);
   };
   window.scheduleFrame();
