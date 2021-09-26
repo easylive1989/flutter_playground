@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_playground/bloc/counter_with_bloc.dart';
 import 'package:flutter_playground/bloc/counter_with_multi_bloc.dart';
 import 'package:flutter_playground/card/card_list.dart';
 import 'package:flutter_playground/custom_paint/login_page.dart';
+import 'package:flutter_playground/get/get_count_view.dart';
+import 'package:flutter_playground/hello_world.dart';
 import 'package:flutter_playground/http/web_content_widget.dart';
 import 'package:flutter_playground/lottie/lottie_example_widget.dart';
 import 'package:flutter_playground/network_image_list/network_image_list.dart';
-import 'package:flutter_playground/notification/notfication_counter.dart';
 import 'package:flutter_playground/provider/counter_with_provider.dart';
 import 'package:flutter_playground/sliver/sliver_page.dart';
 import 'package:flutter_playground/stack/texts_in_stack.dart';
 import 'package:flutter_playground/text_overflow/text_overflow_widget.dart';
 
 import 'column_build/column_build.dart';
+import 'notification/notification_counter.dart';
 
 void main() {
   // debugRepaintRainbowEnabled = true;
   runApp(MyApp());
+  // drawMultipleShape();
 }
 
 class MyApp extends StatefulWidget {
@@ -35,27 +37,27 @@ class WidgetMap {
 }
 
 class _MyAppState extends State<MyApp> {
-  Map<Key, WidgetMap> _widgetMap = {};
-  late Key currentKey;
+  Map<String, WidgetBuilder> _routeMap = {};
 
   @override
   void initState() {
     super.initState();
-    _addPage("Notification", NotificationCounter());
-    _addPage("Stack", TextsInStack());
-    _addPage("Login", LoginPage());
-    _addPage("Image Card", ImageCardList());
-    _addPage("Silver", SliverPage());
-    _addPage("Http", WebContentWidget());
-    _addPage("Bloc", CounterWithBloc());
-    _addPage("Provider", CounterWithProvider());
-    _addPage("Multi Bloc", CounterWithMultiBloc());
-    _addPage("Network Image", NetworkImageList());
-    _addPage("Column Rebuild", ColumnBuild());
-    _addPage("Lottie", LottieExampleWidget());
-    _addPage("Text Overflow", TextOverflowWidget());
-
-    currentKey = _widgetMap.keys.first;
+    _routeMap["/Get"] = (context) => GetCountView();
+    _routeMap["/Notification"] = (context) => MyNotificationWidget();
+    _routeMap["/Stack"] = (context) => TextsInStack();
+    _routeMap["/Login"] = (context) => LoginPage();
+    _routeMap["/Image Card"] = (context) => ImageCardList();
+    _routeMap["/Silver"] = (context) => SliverPage();
+    _routeMap["/Http"] = (context) => WebContentWidget();
+    _routeMap["/Bloc"] = (context) => CounterWithBloc();
+    _routeMap["/Provider"] = (context) => CounterWithProvider();
+    _routeMap["/Multi_Bloc"] = (context) => CounterWithMultiBloc();
+    _routeMap["/Network_Image"] = (context) => NetworkImageList();
+    _routeMap["/Column_Rebuild"] = (context) => ColumnBuild();
+    _routeMap["/Lottie"] = (context) => LottieExampleWidget();
+    _routeMap["/Text_Overflow"] = (context) => TextOverflowWidget();
+    _routeMap["/"] =
+        (context) => HelloWorld(routeNames: _routeMap.keys.toList());
   }
 
   @override
@@ -64,47 +66,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SafeArea(
-        child: Scaffold(
-          body: Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _widgetMap.values.map((e) => e.button).toList(),
-                ),
-              ),
-              Expanded(
-                child: _buildPage(),
-              )
-            ],
-          ),
-        ),
-      ),
+      routes: _routeMap,
     );
-  }
-
-  void _addPage(String title, Widget widget) {
-    var buildButton = _buildButton(title);
-    _widgetMap[buildButton.key!] = WidgetMap(buildButton, widget);
-  }
-
-  Widget _buildPage() {
-    if (_widgetMap.containsKey(currentKey)) {
-      return _widgetMap[currentKey]!.page;
-    }
-    return Container();
-  }
-
-  Widget _buildButton(String title) {
-    var valueKey = ValueKey(title);
-    var textButton = TextButton(
-      key: valueKey,
-      child: Text(title),
-      onPressed: () => setState(() {
-        this.currentKey = valueKey;
-      }),
-    );
-    return textButton;
   }
 }

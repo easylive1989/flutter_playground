@@ -42,3 +42,40 @@ class _NotificationCounterState extends State<NotificationCounter> {
     );
   }
 }
+
+class MyNotificationWidget extends StatelessWidget {
+  const MyNotificationWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: NotificationListener<MyNotification>(
+          onNotification: (notification) {
+            print("Receive notification outside");
+            return true;
+          },
+          child: NotificationListener<MyNotification>(
+            onNotification: (notification) {
+              print("Receive notification inside");
+              return true;
+            },
+            child: Builder(
+              builder: (context) {
+                return TextButton(
+                  child: Text("Click me"),
+                  onPressed: () {
+                    MyNotification().dispatch(context);
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

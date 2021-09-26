@@ -8,11 +8,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRect(
-      child: Align(
-        child: CustomPaint(
-          size: Size(500, 500),
-          painter: LoginPainter(),
+    return Scaffold(
+      body: ClipRect(
+        child: Align(
+          child: CustomPaint(
+            size: Size(500, 500),
+            painter: LoginPainter(),
+          ),
         ),
       ),
     );

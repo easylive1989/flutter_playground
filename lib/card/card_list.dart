@@ -11,24 +11,26 @@ class ImageCardList extends StatefulWidget {
 class _ImageCardListState extends State<ImageCardList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: imageUrlList.length,
-      itemBuilder: (context, index) {
-        return Stack(
-          children: [
-            Card(
-              margin: EdgeInsets.all(8),
-              elevation: 5,
-              // child: Text("123"),
-              child: Image.network(
-                imageUrlList[index],
-                width: 100,
-                height: 100,
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: imageUrlList.length,
+        itemBuilder: (context, index) {
+          return Stack(
+            children: [
+              Card(
+                margin: EdgeInsets.all(8),
+                elevation: 5,
+                // child: Text("123"),
+                child: Image.network(
+                  imageUrlList[index],
+                  width: 100,
+                  height: 100,
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }
