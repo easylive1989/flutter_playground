@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void drawMultipleShape() {
   ContainerLayer containerLayer = ContainerLayer();
@@ -107,27 +106,31 @@ void drawLogin() {
       radius: 80,
     ));
 
-  canvas.drawCircle(Offset(90, 50), 200, paint);
+  canvas.drawCircle(Offset(90, 50), 400, paint);
 
   paint.shader = null;
   paint.color = Color(0xff2a2be8);
-  canvas.drawCircle(Offset(268, 30), 90, paint);
-  canvas.drawCircle(Offset(350, 20), 40, paint);
+  canvas.drawCircle(Offset(500, 30), 220, paint);
+  canvas.drawCircle(Offset(650, 20), 160, paint);
 
   paint.color = Colors.black;
-  canvas.drawCircle(Offset(315, -115), 100, paint);
-  canvas.drawCircle(Offset(370, 160), 100, paint);
+  canvas.drawCircle(Offset(550, -325), 200, paint);
+  canvas.drawCircle(Offset(590, 370), 200, paint);
 
   final textSpan = TextSpan(children: [
     TextSpan(
       text: 'Welcome Back,\n',
-      style: GoogleFonts.lato().copyWith(fontSize: 20, color: Colors.white),
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 60,
+        fontWeight: FontWeight.bold,
+      ),
     ),
     TextSpan(
       text: 'Log In!',
       style: TextStyle(
         color: Colors.white,
-        fontSize: 50,
+        fontSize: 100,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -136,13 +139,15 @@ void drawLogin() {
       text: textSpan,
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.left);
-  textPainter.layout(minWidth: 0, maxWidth: 300);
-  textPainter.paint(canvas, Offset(30, 40));
+  textPainter.layout(minWidth: 0, maxWidth: 600);
+  textPainter.paint(canvas, Offset(0, 0));
 
+  canvas.scale(3, 3);
   Picture picture = recorder.endRecording();
 
   SceneBuilder sceneBuilder = SceneBuilder();
-  sceneBuilder.addPicture(Offset(0, 0), picture);
+
+  sceneBuilder.addPicture(Offset(400, 700), picture);
 
   Scene scene = sceneBuilder.build();
   window.onDrawFrame = () {

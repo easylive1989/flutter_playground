@@ -6,21 +6,22 @@ import 'package:flutter_playground/custom_paint/login_page.dart';
 import 'package:flutter_playground/get/get_count_view.dart';
 import 'package:flutter_playground/hello_world.dart';
 import 'package:flutter_playground/http/web_content_widget.dart';
+import 'package:flutter_playground/lifecycle/my_stateful_widget.dart';
 import 'package:flutter_playground/lottie/lottie_example_widget.dart';
 import 'package:flutter_playground/network_image_list/network_image_list.dart';
 import 'package:flutter_playground/provider/counter_with_provider.dart';
+import 'package:flutter_playground/semantics/floating_widget_example.dart';
 import 'package:flutter_playground/sliver/sliver_page.dart';
 import 'package:flutter_playground/stack/texts_in_stack.dart';
 import 'package:flutter_playground/text_overflow/text_overflow_widget.dart';
-import 'package:flutter_playground/without_flutter/drawCircle.dart';
 
 import 'column_build/column_build.dart';
 import 'notification/notification_counter.dart';
 
 void main() {
   // debugRepaintRainbowEnabled = true;
-  // runApp(MyApp());
-  drawLogin();
+  runApp(MyApp());
+  // drawLogin();
 }
 
 class MyApp extends StatefulWidget {
@@ -43,6 +44,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _routeMap["/FloatingWidget"] =
+        (context) => StackFloatingWidget(child: MyContentWidget());
+    _routeMap["/StatefulWidget"] = (context) => ParentStatefulWidget();
     _routeMap["/Get"] = (context) => GetCountView();
     _routeMap["/Notification"] = (context) => MyNotificationWidget();
     _routeMap["/Stack"] = (context) => TextsInStack();
@@ -64,9 +68,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       routes: _routeMap,
     );
   }
