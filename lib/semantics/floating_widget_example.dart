@@ -66,37 +66,40 @@ class StackFloatingWidgetState extends State<StackFloatingWidget> {
 }
 
 class OverlayFloatingWidget extends StatelessWidget {
-  final OverlayEntry overlayEntry = OverlayEntry(builder: (context) {
-    return Positioned(
-      top: 30,
-      right: 30,
-      child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: Text("Hello World\nHello World\nHello World"),
+  final OverlayEntry _overlayEntry = OverlayEntry(
+    builder: (context) {
+      return Center(
+        child: Card(
+          elevation: 5.0,
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Text("My Floating Widget"),
+          ),
+          color: Colors.blue,
         ),
-        color: Colors.grey,
-      ),
-    );
-  });
+      );
+    },
+  );
 
   OverlayFloatingWidget({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(
-          child: Text("Floating Widget Example"),
-          onTap: () {
-            if (overlayEntry.mounted) {
-              overlayEntry.remove();
-            } else {
-              Overlay.of(context)!.insert(overlayEntry);
-            }
-          },
-        ),
+      appBar: AppBar(title: Text("Floating Widget Example")),
+      body: Builder(
+        builder: (context) {
+          return ElevatedButton(
+            onPressed: () {
+              if (_overlayEntry.mounted) {
+                _overlayEntry.remove();
+              } else {
+                Overlay.of(context)!.insert(_overlayEntry);
+              }
+            },
+            child: Text("Click Me"),
+          );
+        },
       ),
-      body: Container(),
     );
   }
 }

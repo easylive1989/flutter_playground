@@ -44,8 +44,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _routeMap["/FloatingWidget"] =
-        (context) => StackFloatingWidget(child: MyContentWidget());
+    _routeMap["/FloatingWidget"] = (context) => OverlayFloatingWidget();
     _routeMap["/StatefulWidget"] = (context) => ParentStatefulWidget();
     _routeMap["/Get"] = (context) => GetCountView();
     _routeMap["/Notification"] = (context) => MyNotificationWidget();
