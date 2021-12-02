@@ -9,38 +9,50 @@ class SliverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: DefaultTabController(
-        length: 2,
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              pinned: true,
-              actions: [Icon(Icons.filter_list)],
-              expandedHeight: 150,
-              title: Text("App Bar Text"),
-              bottom: TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.call), text: "Call"),
-                  Tab(icon: Icon(Icons.message), text: "Message"),
-                ],
-              ),
-              flexibleSpace: FlexibleSpaceBar(
-                background: FittedBox(
-                  fit: BoxFit.cover,
-                  child: Image.asset("assets/app_bar.jpeg"),
+    return Scaffold(
+      body: Container(
+        child: DefaultTabController(
+          length: 2,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                floating: true,
+                pinned: true,
+                automaticallyImplyLeading: false,
+                // actions: [Icon(Icons.filter_list)],
+                expandedHeight: 100,
+                toolbarHeight: 50,
+                title: Container(
+                    width: MediaQuery.of(context).size.height,
+                    // color: Colors.red,
+                    child: Text("App Bar Text")),
+                // leading: Text("Back Button"),
+                // bottom: TabBar(
+                //   tabs: [
+                //     Tab(icon: Icon(Icons.call), text: "Call"),
+                //     Tab(icon: Icon(Icons.message), text: "Message"),
+                //   ],
+                // ),
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  background: Container(
+                    color: Colors.green,
+                    height: 100,
+                    child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text("Something else")),
+                  ),
                 ),
               ),
-            ),
-            SliverList(
-                delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Image.network(imageUrlList[index]);
-              },
-              childCount: imageUrlList.length,
-            )),
-          ],
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Image.network(imageUrlList[index]);
+                },
+                childCount: imageUrlList.length,
+              )),
+            ],
+          ),
         ),
       ),
     );
