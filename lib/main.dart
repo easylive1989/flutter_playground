@@ -37,13 +37,6 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class WidgetMap {
-  Widget button;
-  Widget page;
-
-  WidgetMap(this.button, this.page);
-}
-
 class _MyAppState extends State<MyApp> {
   Map<String, WidgetBuilder> _routeMap = {};
 

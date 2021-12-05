@@ -9,21 +9,17 @@ class HelloWorld extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: routeNames
-                    .map((routeName) => TextButton(
-                        child: Text(routeName),
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed(routeName)))
-                    .toList(),
-              ),
-            ),
-            Text("Hello Word")
-          ],
+        body: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemCount: routeNames.length,
+          itemBuilder: (context, index) {
+            return TextButton(
+                child: Text(routeNames[index]),
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(routeNames[index]));
+          },
         ),
       ),
     );
