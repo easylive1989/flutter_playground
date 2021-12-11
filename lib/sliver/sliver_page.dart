@@ -10,16 +10,18 @@ class SliverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildCustomScrollView(context),
+      body: _buildNestedScrollView(context),
     );
   }
 
-  NestedScrollView _buildNestedScrollView() {
+  NestedScrollView _buildNestedScrollView(BuildContext context) {
     return NestedScrollView(
       body: _buildImageListView(1),
+      // body: _buildScrollImageColumn(10),
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
-          _buildSliverAppBar(floating: true, pinned: true),
+          // _buildSliverAppBar(floating: true, pinned: true),
+          _buildPersistentHeader(),
         ];
       },
     );
@@ -28,10 +30,8 @@ class SliverPage extends StatelessWidget {
   Widget _buildCustomScrollView(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        _buildSliverAppBar(floating: true, pinned: true),
-        // SliverLayoutBuilder(builder: (context, constraints) {
-        //   return Text("${constraints.viewportMainAxisExtent}");
-        // }),
+        // _buildSliverAppBar(floating: true, pinned: true),
+        _buildPersistentHeader(),
         _buildImageSliverList(1),
       ],
     );
@@ -45,16 +45,25 @@ class SliverPage extends StatelessWidget {
             // child: _buildImageListView(10), // List 自己可以滑動，App Bar 毫無反應
             // child: _buildImageColumn(10), // App Bar 可以縮放，但是 Column 無法滑到最下面
             // child: _buildImageColumn(1), // 只有一張圖片依舊可以往上滑，導致 App bar 蓋到 Column
-            )
+            ),
       ],
     );
   }
 
-  Widget _buildContainer() {
-    return Container(
-      height: 200,
-      width: double.infinity,
-      color: Colors.green,
+  SingleChildScrollView _buildScrollImageColumn(int size) {
+    return SingleChildScrollView(
+      child: _buildImageColumn(size),
+    );
+  }
+
+  Widget _buildPersistentHeader() {
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: MyPersistentHeaderDelegate(
+        child: Text("abc"),
+        min: 60,
+        max: 120,
+      ),
     );
   }
 
@@ -103,5 +112,39 @@ class SliverPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MyPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double min;
+  final double max;
+
+  MyPersistentHeaderDelegate(
+      {required this.child, required this.min, required this.max});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      alignment: Alignment.center,
+      child: child,
+      color: Colors.grey,
+    );
+    return PreferredSize(
+      child: child,
+      preferredSize: Size(double.infinity, max),
+    );
+  }
+
+  @override
+  double get maxExtent => max;
+
+  @override
+  double get minExtent => min;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }
