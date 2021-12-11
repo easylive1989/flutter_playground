@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/custom_paint/login_painter.dart';
+import 'package:flutter_playground/ui/custom_paint/login_painter.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({

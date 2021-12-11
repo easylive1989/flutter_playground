@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../common/data.dart';
+import 'package:flutter_playground/common/data.dart';
 
 class SliverPage extends StatelessWidget {
   const SliverPage({
