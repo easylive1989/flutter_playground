@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_playground/dependencies/http/web_content_widget.dart';
 import 'package:flutter_playground/hello_world.dart';
 import 'package:flutter_playground/research/key_performance/key_list_widget.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_playground/state_management/bloc/counter_with_multi_bloc
 import 'package:flutter_playground/state_management/get/get_count_view.dart';
 import 'package:flutter_playground/state_management/provider/counter_with_provider.dart';
 import 'package:flutter_playground/ui/custom_paint/login_page.dart';
+import 'package:flutter_playground/ui/flex/column_flex.dart';
 import 'package:flutter_playground/ui/lottie/lottie_example_widget.dart';
 import 'package:flutter_playground/ui/overlay/floating_widget_example.dart';
 import 'package:flutter_playground/ui/sliver/sliver_page.dart';
@@ -21,6 +23,7 @@ void main() {
   if (defaultTargetPlatform == TargetPlatform.android) {
     InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
   }
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MyApp());
   // drawLogin();
 }
@@ -38,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _routeMap["/Column_Flex"] = (context) => ColumnFlex();
     _routeMap["/KeyListWidget"] = (context) => KeyListWidget();
     _routeMap["/FloatingWidget"] = (context) => OverlayFloatingWidget();
     _routeMap["/Get"] = (context) => GetCountView();
