@@ -13,16 +13,13 @@ import 'package:flutter_playground/ui/custom_paint/login_page.dart';
 import 'package:flutter_playground/ui/flex/column_flex.dart';
 import 'package:flutter_playground/ui/lottie/lottie_example_widget.dart';
 import 'package:flutter_playground/ui/overlay/floating_widget_example.dart';
+import 'package:flutter_playground/ui/scroll/bottom_card.dart';
 import 'package:flutter_playground/ui/sliver/sliver_page.dart';
 import 'package:flutter_playground/ui/stack/texts_in_stack.dart';
 import 'package:flutter_playground/ui/text_overflow/text_overflow_widget.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 void main() {
-  // debugRepaintRainbowEnabled = true;
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-  }
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MyApp());
   // drawLogin();
@@ -41,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _routeMap["/Bottom_Scroll"] = (context) => BottomScrollExample();
     _routeMap["/Column_Flex"] = (context) => ColumnFlex();
     _routeMap["/KeyListWidget"] = (context) => KeyListWidget();
     _routeMap["/FloatingWidget"] = (context) => OverlayFloatingWidget();
