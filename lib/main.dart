@@ -8,6 +8,7 @@ import 'package:flutter_playground/state_management/bloc/counter_with_bloc.dart'
 import 'package:flutter_playground/state_management/bloc/counter_with_multi_bloc.dart';
 import 'package:flutter_playground/state_management/get/get_count_view.dart';
 import 'package:flutter_playground/state_management/provider/counter_with_provider.dart';
+import 'package:flutter_playground/ui/custom_child_layout/complicated_item.dart';
 import 'package:flutter_playground/ui/custom_paint/login_page.dart';
 import 'package:flutter_playground/ui/flex/column_flex.dart';
 import 'package:flutter_playground/ui/lottie/lottie_example_widget.dart';
@@ -26,6 +27,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final Map<String, WidgetBuilder> _routeMap = {
+    "/user-info": (context)=> UserList(),
     "/Bottom_Scroll": (context) => BottomScrollExample(),
     "/Column_Flex": (context) => ColumnFlex(),
     "/KeyListWidget": (context) => KeyListWidget(),
