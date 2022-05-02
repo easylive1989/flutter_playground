@@ -38,10 +38,7 @@ class UserInfoItem extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                userInfo.name,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                              Text(userInfo.name, style: TextStyle(fontWeight: FontWeight.bold)),
                               SizedBox(height: 8),
                               Text(userInfo.aboutMe, style: TextStyle(fontSize: 10)),
                             ],

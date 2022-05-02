@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/ui/custom_child_layout/custom_user_info_item.dart';
 import 'package:flutter_playground/ui/custom_child_layout/user_info.dart';
+import 'package:flutter_playground/ui/custom_child_layout/user_info_button.dart';
 import 'package:flutter_playground/ui/custom_child_layout/user_info_item.dart';
+import 'package:flutter_playground/ui/custom_child_layout/user_tag.dart';
+
+import 'custom_user_info_item.dart';
 
 class UserList extends StatelessWidget {
   const UserList({Key? key}) : super(key: key);
@@ -33,6 +38,15 @@ class UserList extends StatelessWidget {
         stars: 141,
       )
     ];
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: userList.length,
+        itemBuilder: (context, index) {
+          UserInfo userInfo = userList[index];
+          return CustomUserInfoItem(userInfo: userInfo);
+        },
+      ),
+    );
     return Scaffold(
       body: ListView.builder(
         itemCount: userList.length,
