@@ -4,6 +4,7 @@ import 'package:flutter_playground/dependencies/http/web_content_widget.dart';
 import 'package:flutter_playground/hello_world.dart';
 import 'package:flutter_playground/research/key_performance/key_list_widget.dart';
 import 'package:flutter_playground/research/notification/notification_counter.dart';
+import 'package:flutter_playground/research/stack_size/stack_size.dart';
 import 'package:flutter_playground/state_management/bloc/counter_with_bloc.dart';
 import 'package:flutter_playground/state_management/bloc/counter_with_multi_bloc.dart';
 import 'package:flutter_playground/state_management/get/get_count_view.dart';
@@ -27,7 +28,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final Map<String, WidgetBuilder> _routeMap = {
-    "/user-info": (context)=> UserList(),
+    "/stack-size": (context) => StackSize(),
+    "/user-info": (context) => UserList(),
     "/Bottom_Scroll": (context) => BottomScrollExample(),
     "/Column_Flex": (context) => ColumnFlex(),
     "/KeyListWidget": (context) => KeyListWidget(),
