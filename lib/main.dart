@@ -18,6 +18,7 @@ import 'package:flutter_playground/ui/scroll/bottom_card.dart';
 import 'package:flutter_playground/ui/sliver/sliver_page.dart';
 import 'package:flutter_playground/ui/stack/texts_in_stack.dart';
 import 'package:flutter_playground/ui/text_overflow/text_overflow_widget.dart';
+import 'package:flutter_playground/ui/ticker/countdown_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final Map<String, WidgetBuilder> _routeMap = {
+    "/countdown": (context) => CountdownWidget(),
     "/stack-size": (context) => StackSize(),
     "/user-info": (context) => UserList(),
     "/Bottom_Scroll": (context) => BottomScrollExample(),
